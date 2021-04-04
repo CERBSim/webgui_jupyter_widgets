@@ -1,0 +1,5 @@
+{
+  "load_extensions": {
+    "webgui_jupyter_widgets/extension": true
+  }
+}
