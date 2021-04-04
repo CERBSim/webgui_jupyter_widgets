@@ -1,5 +1,5 @@
 // Copyright (c) Jupyter Development Team.
-// Distributed under the terms of the Modified BSD License.
+// Distributed under the terms of the LGPLv2.1 License.
 
 import * as widgets from '@jupyter-widgets/base';
 import * as services from '@jupyterlab/services';

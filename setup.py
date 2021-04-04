@@ -2,7 +2,7 @@
 # coding: utf-8
 
 # Copyright (c) Jupyter Development Team.
-# Distributed under the terms of the Modified BSD License.
+# Distributed under the terms of the Modified LGPLv2.1 License.
 
 from __future__ import print_function
 from glob import glob
@@ -72,13 +72,13 @@ setup_args = dict(
     author          = 'CERBSim',
     author_email    = 'mhochsteger@cerbsim.com',
     url             = 'https://github.com/CERBSim/webgui_jupyter_widgets',
-    license         = 'BSD',
+    license         = 'LGPLv2.1',
     platforms       = "Linux, Mac OS X, Windows",
     keywords        = ['Jupyter', 'Widgets', 'IPython'],
     classifiers     = [
         'Intended Audience :: Developers',
         'Intended Audience :: Science/Research',
-        'License :: OSI Approved :: BSD License',
+        'License :: OSI Approved :: GNU Lesser General Public License v2 (LGPLv2)',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
         'Programming Language :: Python :: 3.4',

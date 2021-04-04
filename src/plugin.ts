@@ -1,5 +1,5 @@
 // Copyright (c) CERBSim
-// Distributed under the terms of the Modified BSD License.
+// Distributed under the terms of the LGPLv2.1 License.
 
 import { Application, IPlugin } from '@phosphor/application';
 
