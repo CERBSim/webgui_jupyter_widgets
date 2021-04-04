@@ -7,6 +7,7 @@
     "moduleResolution": "node",
     "noEmitOnError": true,
     "noUnusedLocals": true,
+    "noImplicitAny": false,                // fixme
     "outDir": "lib",
     "resolveJsonModule": true,
     "rootDir": "src",

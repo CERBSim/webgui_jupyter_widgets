@@ -4,7 +4,7 @@
 # Copyright (c) CERBSim.
 # Distributed under the terms of the LGPLv2.1 License.
 
-from .example import ExampleWidget
+from .widget import WebguiWidget
 from ._version import __version__, version_info
 
 def _jupyter_labextension_paths():
