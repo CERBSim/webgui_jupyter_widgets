@@ -16,6 +16,14 @@ const resolve = {
   extensions: [".webpack.js", ".web.js", ".ts", ".js"]
 };
 
+const performance =  {
+    hints: false,
+    maxEntrypointSize: 1024000,
+    maxAssetSize: 1024000,
+};
+
+const mode = 'production';
+
 module.exports = [
   /**
    * Notebook extension
@@ -37,6 +45,8 @@ module.exports = [
     devtool: 'source-map',
     externals,
     resolve,
+    performance,
+    mode,
   },
 
   /**
@@ -64,6 +74,8 @@ module.exports = [
     },
     externals,
     resolve,
+    performance,
+    mode,
   },
 
 
@@ -86,6 +98,8 @@ module.exports = [
     devtool: 'source-map',
     externals,
     resolve,
+    performance,
+    mode,
   }
 
 ];

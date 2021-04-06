@@ -8,6 +8,7 @@
     "noEmitOnError": true,
     "noUnusedLocals": true,
     "noImplicitAny": false,                // fixme
+    "disableSizeLimit": true,
     "outDir": "lib",
     "resolveJsonModule": true,
     "rootDir": "src",
