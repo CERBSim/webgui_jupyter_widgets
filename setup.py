@@ -64,7 +64,7 @@ cmdclass['jsdeps'] = combine_commands(
 
 setup_args = dict(
     name            = name,
-    description     = 'Jupyter widgetds library for webgui js visualization library',
+    description     = 'Jupyter widgets library for webgui js visualization library',
     version         = version,
     scripts         = glob(pjoin('scripts', '*')),
     cmdclass        = cmdclass,
