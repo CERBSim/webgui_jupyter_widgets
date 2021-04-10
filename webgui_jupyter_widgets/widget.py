@@ -10,7 +10,7 @@ TODO: Add module docstring
 
 from ipywidgets import DOMWidget
 from traitlets import Unicode, Dict
-from ._frontend import module_name, module_version, webgui_version
+from ._version import module_name, module_version, webgui_version
 import numpy as np
 
 try:

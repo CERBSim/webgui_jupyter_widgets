@@ -6,7 +6,7 @@
 
 from __future__ import print_function
 from glob import glob
-import os
+import os, json
 from os.path import join as pjoin
 from setuptools import setup, find_packages
 
@@ -28,7 +28,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 name = 'webgui_jupyter_widgets'
 
 # Get the version
-version = get_version(pjoin(name, '_version.py'))
+version = json.load(open('package.json'))['version']
 
 
 # Representative files that should exist after a successful build
