@@ -8,10 +8,12 @@
 TODO: Add module docstring
 """
 
+from IPython.display import display
 from ipywidgets import DOMWidget
 from traitlets import Unicode, Dict
 from ._version import module_name, module_version, webgui_version
 import numpy as np
+import os
 
 try:
     __IPYTHON__
