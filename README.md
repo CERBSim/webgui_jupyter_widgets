@@ -70,3 +70,31 @@ After a change wait for the build to finish and then refresh your browser and th
 
 #### Python:
 If you make a change to the python code then you will need to restart the notebook kernel to have it take effect.
+
+
+# Build with development version of webgui
+```code
+# initial setup
+DIR=`pwd`
+git clone https://github.com/CERBSim/webgui.git
+git clone https://github.com/CERBSim/webgui_jupyter_widgets.git
+cd webgui
+npm install
+npm run build-dev
+cd ../webgui_jupyter_widgets
+npm install
+rm -rf node_modules/webgui
+ln -s $DIR/webgui node_modules/webgui
+cd ..
+
+# update and build
+cd webgui
+git pull
+npm run build-dev
+
+cd ../webgui_jupyter_widgets
+git pull
+npm run build
+pip install --user .
+jupyter nbextension install --user --py webgui_jupyter_widgets
+```
