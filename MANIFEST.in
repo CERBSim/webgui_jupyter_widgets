@@ -25,6 +25,7 @@ graft tests
 prune tests/build
 
 # Javascript files
+graft webgui
 graft webgui_jupyter_widgets/nbextension
 graft src
 graft css

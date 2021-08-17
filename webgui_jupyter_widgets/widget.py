@@ -11,9 +11,12 @@ TODO: Add module docstring
 from IPython.display import display
 from ipywidgets import DOMWidget
 from traitlets import Unicode, Dict
-from ._version import module_name, module_version, webgui_version
+from ._version import module_name, module_version
 import numpy as np
 import os
+
+from .webgui_js import code as _webgui_js_code
+from .webgui_js import version as webgui_version
 
 try:
     __IPYTHON__
@@ -26,7 +29,6 @@ try:
     _IN_GOOGLE_COLAB = True
 except ImportError:
     _IN_GOOGLE_COLAB = False
-
 
 class WebGuiWidget(DOMWidget):
     """TODO: Add docstring here
@@ -82,16 +84,20 @@ _html_template = """
         </style>
     </head>
     <body>
-          <script src="https://unpkg.com/webgui@{{webgui_version}}/dist/webgui.js"></script>
+          <script>
+            {{webgui_code}}
+          </script>
           <script>
             {render}
+            webgui.then( (webgui) => {
 
             const scene = new webgui.Scene();
             scene.init(document.body, render_data, {preserveDrawingBuffer: false});
+            });
           </script>
     </body>
 </html>
-""".replace("{{webgui_version}}", webgui_version)
+""".replace("{{webgui_code}}", _webgui_js_code)
 _screenshot_html_template = _html_template.replace("preserveDrawingBuffer: false", "preserveDrawingBuffer: true")
 
 class BaseWebGuiScene:

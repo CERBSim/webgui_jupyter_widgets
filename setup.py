@@ -9,6 +9,7 @@ from glob import glob
 import os, json
 from os.path import join as pjoin
 from setuptools import setup, find_packages
+from setuptools.command.build_ext import build_ext
 
 
 from jupyter_packaging import (
@@ -29,6 +30,9 @@ name = 'webgui_jupyter_widgets'
 
 # Get the version
 version = json.load(open('package.json'))['version']
+
+webgui_dir = os.path.join(HERE,"webgui")
+webgui_version = json.load(open('webgui/package.json'))['version']
 
 
 # Representative files that should exist after a successful build
@@ -53,12 +57,21 @@ data_files_spec = [
     ('etc/jupyter/nbconfig/notebook.d', '.', 'webgui_jupyter_widgets.json'),
 ]
 
+class generate_webgui_js(build_ext):
+    def run(self):
+        webgui_js_code = open(os.path.join(webgui_dir, 'dist','webgui_external_three.js')).read()
+        open('webgui_jupyter_widgets/webgui_js.py','w').write(
+"""version = "{}"
+code = r\"\"\"{}\"\"\"
+""".format(webgui_version, webgui_js_code))
 
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
     data_files_spec=data_files_spec)
 cmdclass['jsdeps'] = combine_commands(
+    install_npm(webgui_dir, build_cmd='build-prod'),
     install_npm(HERE, build_cmd='build:prod'),
     ensure_targets(jstargets),
+    generate_webgui_js,
 )
 
 
@@ -85,6 +98,8 @@ setup_args = dict(
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
         'Framework :: Jupyter',
     ],
     include_package_data = True,

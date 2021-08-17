@@ -13,5 +13,3 @@ version_info = (version_major, version_minor, version_patch)
 
 module_name = "webgui_jupyter_widgets"
 module_version = __version__
-
-webgui_version = package['dependencies']['webgui']

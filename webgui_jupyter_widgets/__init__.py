@@ -47,3 +47,4 @@ def _jupyter_nbextension_paths():
         'dest': 'webgui_jupyter_widgets',
         'require': 'webgui_jupyter_widgets/extension'
     }]
+
