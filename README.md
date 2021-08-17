@@ -75,26 +75,16 @@ If you make a change to the python code then you will need to restart the notebo
 # Build with development version of webgui
 ```code
 # initial setup
-DIR=`pwd`
-git clone https://github.com/CERBSim/webgui.git
 git clone https://github.com/CERBSim/webgui_jupyter_widgets.git
-cd webgui
-npm install
-npm run build-dev
-cd ../webgui_jupyter_widgets
-npm install
-rm -rf node_modules/webgui
-ln -s $DIR/webgui node_modules/webgui
-cd ..
-
-# update and build
-cd webgui
-git pull
-npm run build-dev
-
-cd ../webgui_jupyter_widgets
-git pull
-npm run build
+cd webgui_jupyter_widgets
+git submodule update --init --recursive
 pip install --user .
 jupyter nbextension install --user --py webgui_jupyter_widgets
+
+# build dev version of webgui
+cd webgui
+git checkout main
+git pull
+cd ..
+pip install --user .
 ```
