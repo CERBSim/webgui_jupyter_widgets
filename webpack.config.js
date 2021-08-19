@@ -8,8 +8,8 @@ const rules = [
   { test: /\.css$/, use: ['style-loader', 'css-loader']}
 ];
 
-// Packages that shouldn't be bundled but loaded at runtime
-const externals = ['@jupyter-widgets/base'];
+const externals1 = ['@jupyter-widgets/base'];
+const externals2 = ['@jupyter-widgets/base', 'webgui'];
 
 const resolve = {
   // Add '.ts' and '.tsx' as resolvable extensions.
@@ -43,7 +43,7 @@ module.exports = [
       rules: rules
     },
     devtool: 'source-map',
-    externals,
+    externals: externals1,
     resolve,
     performance,
     mode,
@@ -72,7 +72,7 @@ module.exports = [
     module: {
         rules: rules
     },
-    externals,
+    externals: externals2,
     resolve,
     performance,
     mode,
@@ -96,7 +96,7 @@ module.exports = [
       rules: rules
     },
     devtool: 'source-map',
-    externals,
+    externals: externals2,
     resolve,
     performance,
     mode,

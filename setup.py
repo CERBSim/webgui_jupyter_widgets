@@ -51,6 +51,7 @@ package_data_spec = {
 
 
 data_files_spec = [
+    ('share/jupyter/nbconvert/templates/webgui', 'template', '**'),
     ('share/jupyter/nbextensions/webgui_jupyter_widgets', 'webgui_jupyter_widgets/nbextension', '**'),
     ('share/jupyter/labextensions/webgui_jupyter_widgets', 'webgui_jupyter_widgets/labextension', '**'),
     ('share/jupyter/labextensions/webgui_jupyter_widgets', '.', 'install.json'),
@@ -59,11 +60,23 @@ data_files_spec = [
 
 class generate_webgui_js(build_ext):
     def run(self):
-        webgui_js_code = open(os.path.join(webgui_dir, 'dist','webgui_external_three.js')).read()
+        webgui_js_code = open(os.path.join(webgui_dir, 'dist','webgui.js')).read()
         open('webgui_jupyter_widgets/webgui_js.py','w').write(
 """version = "{}"
 code = r\"\"\"{}\"\"\"
 """.format(webgui_version, webgui_js_code))
+
+        open('template/index.html.j2','w').write(
+"""{%- extends 'classic/index.html.j2' -%}
+
+{%- block html_head_js -%}
+  {{ super() }}
+  <script>
+{{{webgui_code}}}
+
+  </script>
+{%- endblock html_head_js -%}
+""".replace("{{{webgui_code}}}", webgui_js_code))
 
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
     data_files_spec=data_files_spec)

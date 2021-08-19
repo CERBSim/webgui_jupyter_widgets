@@ -9,8 +9,7 @@ import {
 
 import {
   Scene
-} from '../webgui/dist/webgui.js';
-
+} from 'webgui';
 
 import { MODULE_NAME, MODULE_VERSION } from './version';
 
