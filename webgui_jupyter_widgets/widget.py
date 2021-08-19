@@ -15,8 +15,7 @@ from ._version import module_name, module_version
 import numpy as np
 import os
 
-from .webgui_js import code as _webgui_js_code
-from .webgui_js import version as webgui_version
+#  from .webgui_js import version as webgui_version
 
 try:
     __IPYTHON__
@@ -60,7 +59,13 @@ def encodeData( array ):
     res = b64encode(values).decode("ascii")
     return res
 
-_html_template = """
+_html_template = None
+
+def getHTML():
+    global _html_template;
+    if _html_template is None:
+        from .webgui_js import code
+        _html_template = """
 <!DOCTYPE html>
 <html>
     <head>
@@ -98,11 +103,16 @@ _html_template = """
           </script>
     </body>
 </html>
-""".replace("{{webgui_code}}", _webgui_js_code)
-_screenshot_html_template = _html_template.replace("preserveDrawingBuffer: false", "preserveDrawingBuffer: true")
+""".replace("{{webgui_code}}", code)
+    return _html_template
+
+def getScreenshotHTML():
+    return getHTML().replace("preserveDrawingBuffer: false", "preserveDrawingBuffer: true")
 
 class BaseWebGuiScene:
-    def GenerateHTML(self, filename=None, template=_html_template):
+    def GenerateHTML(self, filename=None, template=None):
+        if template is None:
+            template = getHTML()
         import json
         d = self.GetData()
 
@@ -118,7 +128,7 @@ class BaseWebGuiScene:
 
     def MakeScreenshot(self, filename, width=1200, height=600):
         html_file = filename+".html"
-        self.GenerateHTML(html_file, _screenshot_html_template)
+        self.GenerateHTML(html_file, getScreenshotHTML())
 
         # start headless browser to render html
         from selenium import webdriver

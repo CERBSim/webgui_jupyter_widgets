@@ -64,6 +64,10 @@ class generate_webgui_js(build_ext):
         open('webgui_jupyter_widgets/webgui_js.py','w').write(
 """version = "{}"
 code = r\"\"\"{}\"\"\"
+
+if __name__ == '__main__':
+    import sys
+    open(sys.argv[1], 'w').write(code)
 """.format(webgui_version, webgui_js_code))
 
         open('template/index.html.j2','w').write(
