@@ -10,6 +10,7 @@ import os, json
 from os.path import join as pjoin
 from setuptools import setup, find_packages
 from setuptools.command.build_ext import build_ext
+import shutil
 
 
 from jupyter_packaging import (
@@ -45,7 +46,8 @@ jstargets = [
 package_data_spec = {
     name: [
         'nbextension/**js*',
-        'labextension/**'
+        'labextension/**',
+        'js/**'
     ]
 }
 
@@ -81,6 +83,10 @@ if __name__ == '__main__':
   </script>
 {%- endblock html_head_js -%}
 """.replace("{{{webgui_code}}}", webgui_js_code))
+        join = os.path.join
+        js_dir = join(HERE, 'webgui_jupyter_widgets', 'js')
+        shutil.copy( join(webgui_dir,'dist','webgui.js'), js_dir)
+        shutil.copy( join(HERE, 'dist', 'index.js'), join(js_dir, 'webgui_jupyter_widgets.js'))
 
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
     data_files_spec=data_files_spec)
