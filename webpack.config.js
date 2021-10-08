@@ -9,7 +9,8 @@ const rules = [
 ];
 
 const externals1 = ['@jupyter-widgets/base'];
-const externals2 = ['@jupyter-widgets/base', 'webgui'];
+// const externals2 = ['@jupyter-widgets/base', 'webgui'];
+const externals2 = externals1;
 
 const resolve = {
   // Add '.ts' and '.tsx' as resolvable extensions.
