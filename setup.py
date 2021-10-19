@@ -53,7 +53,7 @@ package_data_spec = {
 
 
 data_files_spec = [
-    ('share/jupyter/nbconvert/templates/webgui', 'template', '**'),
+#    ('share/jupyter/nbconvert/templates/webgui', 'template', '**'),
     ('share/jupyter/nbextensions/webgui_jupyter_widgets', 'webgui_jupyter_widgets/nbextension', '**'),
     ('share/jupyter/labextensions/webgui_jupyter_widgets', 'webgui_jupyter_widgets/labextension', '**'),
     ('share/jupyter/labextensions/webgui_jupyter_widgets', '.', 'install.json'),
