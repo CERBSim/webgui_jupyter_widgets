@@ -72,17 +72,17 @@ if __name__ == '__main__':
     open(sys.argv[1], 'w').write(code)
 """.format(webgui_version, webgui_js_code))
 
-        open('template/index.html.j2','w').write(
-"""{%- extends 'classic/index.html.j2' -%}
-
-{%- block html_head_js -%}
-  {{ super() }}
-  <script>
-{{{webgui_code}}}
-
-  </script>
-{%- endblock html_head_js -%}
-""".replace("{{{webgui_code}}}", webgui_js_code))
+#        open('template/index.html.j2','w').write(
+#"""{%- extends 'classic/index.html.j2' -%}
+#
+#{%- block html_head_js -%}
+#  {{ super() }}
+#  <script>
+#{{{webgui_code}}}
+#
+#  </script>
+#{%- endblock html_head_js -%}
+#""".replace("{{{webgui_code}}}", webgui_js_code))
         join = os.path.join
         js_dir = join(HERE, 'webgui_jupyter_widgets', 'js')
         shutil.copy( join(webgui_dir,'dist','webgui.js'), js_dir)
