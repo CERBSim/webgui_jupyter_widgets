@@ -53,9 +53,9 @@ class WebGuiDocuWidget(DOMWidget):
 
     value = Dict({}).tag(sync=True)
 
-def encodeData( array ):
+def encodeData( array, dtype=np.float32 ):
     from base64 import b64encode
-    values = np.array(array.flatten(), dtype=np.float32)
+    values = np.array(array.flatten(), dtype=dtype)
     res = b64encode(values).decode("ascii")
     return res
 
