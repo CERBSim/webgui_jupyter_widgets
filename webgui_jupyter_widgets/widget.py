@@ -53,11 +53,16 @@ class WebGuiDocuWidget(DOMWidget):
 
     value = Dict({}).tag(sync=True)
 
-def encodeData( array, dtype=np.float32 ):
+def encodeData( array, dtype=None, encoding='b64' ):
     from base64 import b64encode
+    dtype = dtype or array.dtype
     values = np.array(array.flatten(), dtype=dtype)
-    res = b64encode(values).decode("ascii")
-    return res
+    if encoding=='b64':
+        return b64encode(values).decode("ascii")
+    elif encoding=='binary':
+        return values.tobytes()
+    else:
+        raise RuntimeError("unknown encoding" + str(encoding))
 
 _html_template = None
 
@@ -114,6 +119,7 @@ class BaseWebGuiScene:
         if template is None:
             template = getHTML()
         import json
+        self.encoding = 'b64'
         d = self.GetData()
 
         data = json.dumps(d)
@@ -160,10 +166,12 @@ class BaseWebGuiScene:
 
     def Draw(self):
         self.widget = WebGuiWidget()
+        self.encoding='binary'
         self.widget.value = self.GetData()
         display(self.widget)
 
     def Redraw(self):
+        self.encoding='binary'
         self.widget.value = self.GetData(set_minmax=False)
 
     def __repr__(self):
