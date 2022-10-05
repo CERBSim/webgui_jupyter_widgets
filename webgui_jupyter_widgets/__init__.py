@@ -4,7 +4,8 @@
 # Copyright (c) CERBSim.
 # Distributed under the terms of the LGPLv2.1 License.
 
-from .widget import WebGuiWidget, WebGuiDocuWidget, BaseWebGuiScene, encodeData
+from .widget import WebGuiWidget, WebGuiDocuWidget, BaseWebGuiScene
+from .html import encodeData
 from ._version import __version__, version_info
 
 def _jupyter_labextension_paths():

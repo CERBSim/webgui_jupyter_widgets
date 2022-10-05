@@ -52,7 +52,7 @@ export class WebguiView extends DOMWidgetView {
     let render_data = this.model.get("value");
     this.scene = new Scene();
     let container = document.createElement( 'div' );
-    container.setAttribute("style", "height: 50vw; width: 100vw;");
+    container.setAttribute("style", "height: 100%; width: 100%;");
     this.el.appendChild(container);
     setTimeout(()=> {
       this.scene.init(container, render_data);
