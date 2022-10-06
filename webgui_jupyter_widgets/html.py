@@ -2,7 +2,7 @@
 def encodeData( data, dtype=None, encoding='b64' ):
     import numpy as np
     from base64 import b64encode
-    dtype = dtype or array.dtype
+    dtype = dtype or data.dtype
     values = np.array(data.flatten(), dtype=dtype)
     if encoding=='b64':
         return b64encode(values).decode("ascii")

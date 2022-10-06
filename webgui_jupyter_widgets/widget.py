@@ -65,7 +65,7 @@ class BaseWebGuiScene:
     def Draw(self):
         from IPython.display import display
         from ipywidgets import Layout
-        layout = Layout(width="50vw", height="50vh")
+        layout = Layout(width="100%", height="50vh")
         self.widget = WebGuiWidget(layout=layout)
         self.encoding='binary'
         self.widget.value = self.GetData()
