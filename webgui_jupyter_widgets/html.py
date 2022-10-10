@@ -65,9 +65,6 @@ def GenerateHTML(data, filename=None, template=None):
     if template is None:
         template = getHTML()
     import json
-    self.encoding = 'b64'
-    d = self.GetData()
-
     data = json.dumps(data)
 
     html = template.replace('{data}', data )
@@ -79,8 +76,9 @@ def GenerateHTML(data, filename=None, template=None):
     return html
 
 def MakeScreenshot(data, filename, width=1200, height=600):
+    import os, time
     html_file = filename+".html"
-    self.GenerateHTML(data, getScreenshotHTML())
+    GenerateHTML(data, filename=html_file, template=getScreenshotHTML())
 
     # start headless browser to render html
     from selenium import webdriver
@@ -104,7 +102,6 @@ def MakeScreenshot(data, filename, width=1200, height=600):
     driver.get(fpath)
     driver.implicitly_wait(10)
 
-    import time
     time.sleep(2)
     driver.get_screenshot_as_file(filename)
     os.remove(html_file)
