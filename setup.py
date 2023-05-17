@@ -88,11 +88,12 @@ if __name__ == '__main__':
         shutil.copy( join(webgui_dir,'dist','webgui.js'), js_dir)
         shutil.copy( join(HERE, 'dist', 'index.js'), join(js_dir, 'webgui_jupyter_widgets.js'))
 
+is_dev_build = bool(os.environ.get('DEV_BUILD', False))
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
     data_files_spec=data_files_spec)
 cmdclass['jsdeps'] = combine_commands(
-    install_npm(webgui_dir, build_cmd='build-prod'),
-    install_npm(HERE, build_cmd='build:prod'),
+    install_npm(webgui_dir, build_cmd='build' if not is_dev_build else 'build-dev'),
+    install_npm(HERE, build_cmd='build:prod' if not is_dev_build else 'build'),
     ensure_targets(jstargets),
     generate_webgui_js,
 )
@@ -105,10 +106,11 @@ setup_args = dict(
     scripts         = glob(pjoin('scripts', '*')),
     cmdclass        = cmdclass,
     packages        = find_packages(),
+    package_dir     = {"webgui_jupyter_widgets": "webgui_jupyter_widgets"},
     author          = 'CERBSim',
     author_email    = 'mhochsteger@cerbsim.com',
     url             = 'https://github.com/CERBSim/webgui_jupyter_widgets',
-    license         = 'LGPLv2.1',
+    license_files   = ['LGPLv2.1'],
     platforms       = "Linux, Mac OS X, Windows",
     keywords        = ['Jupyter', 'Widgets', 'IPython'],
     classifiers     = [
