@@ -8,7 +8,9 @@ import json, os
 package = json.load(open(os.path.join(os.path.dirname(__file__), "labextension", "package.json")))
 
 __version__ = package["version"]
-version_major, version_minor, version_patch = map(int, __version__.split('.'))
+from packaging.version import parse as _parse
+v = _parse(__version__)
+version_major, version_minor, version_patch = v.major, v.minor, v.micro
 version_info = (version_major, version_minor, version_patch)
 
 module_name = "webgui_jupyter_widgets"
