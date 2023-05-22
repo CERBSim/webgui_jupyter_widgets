@@ -16,7 +16,7 @@ _html_template = None
 def getHTML():
     global _html_template;
     if _html_template is None:
-        from .webgui_js import code
+        code = open(__file__.replace("html.py", "webgui.js")).read()
         _html_template = """
 <!DOCTYPE html>
 <html>
@@ -41,17 +41,13 @@ def getHTML():
         </style>
     </head>
     <body>
-          </script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
           <script>
             {{webgui_code}}
           </script>
           <script>
             {render}
-            require(['webgui'], (webgui) => {
-
             const scene = new webgui.Scene();
             scene.init(document.body, render_data, {preserveDrawingBuffer: false});
-            });
           </script>
     </body>
 </html>

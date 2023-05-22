@@ -18,13 +18,9 @@ from jupyter_packaging import (
     install_npm,
     ensure_targets,
     combine_commands,
-    get_version,
 )
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-
-
-
 
 # The name of the project
 name = 'webgui_jupyter_widgets'
@@ -47,7 +43,7 @@ package_data_spec = {
     name: [
         'nbextension/**js*',
         'labextension/**',
-        'js/**'
+        'webgui.js'
     ]
 }
 
@@ -65,7 +61,7 @@ class generate_webgui_js(build_ext):
         webgui_js_code = open(os.path.join(webgui_dir, 'dist','webgui.js')).read()
         open('webgui_jupyter_widgets/webgui_js.py','w').write(
 """version = "{}"
-code = r\"\"\"{}\"\"\"
+code = open(__file__.replace("webgui_js.py", "webgui.js")).read()
 
 if __name__ == '__main__':
     import sys
@@ -84,9 +80,8 @@ if __name__ == '__main__':
 #{%- endblock html_head_js -%}
 #""".replace("{{{webgui_code}}}", webgui_js_code))
         join = os.path.join
-        js_dir = join(HERE, 'webgui_jupyter_widgets', 'js')
+        js_dir = join(HERE, 'webgui_jupyter_widgets')
         shutil.copy( join(webgui_dir,'dist','webgui.js'), js_dir)
-        shutil.copy( join(HERE, 'dist', 'index.js'), join(js_dir, 'webgui_jupyter_widgets.js'))
 
 is_dev_build = bool(os.environ.get('DEV_BUILD', False))
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
