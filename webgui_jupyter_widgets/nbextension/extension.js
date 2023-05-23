@@ -7,6 +7,7 @@ define(function() {
         map: {
             '*': {
                 'webgui_jupyter_widgets': 'nbextensions/webgui_jupyter_widgets/index',
+                'webgui': 'nbextensions/webgui_jupyter_widgets/webgui',
             },
         }
     });

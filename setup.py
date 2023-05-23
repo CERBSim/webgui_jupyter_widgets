@@ -80,8 +80,10 @@ if __name__ == '__main__':
 #{%- endblock html_head_js -%}
 #""".replace("{{{webgui_code}}}", webgui_js_code))
         join = os.path.join
-        js_dir = join(HERE, 'webgui_jupyter_widgets')
-        shutil.copy( join(webgui_dir,'dist','webgui.js'), js_dir)
+        src_file = join(webgui_dir, 'dist', 'webgui.js')
+        shutil.copy( src_file, join(HERE, 'webgui_jupyter_widgets', 'nbextension'))
+        shutil.copy( src_file, join(HERE, 'webgui_jupyter_widgets', 'labextensions'))
+        shutil.copy( src_file, join(HERE, 'webgui_jupyter_widgets'))
 
 is_dev_build = bool(os.environ.get('DEV_BUILD', False))
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,

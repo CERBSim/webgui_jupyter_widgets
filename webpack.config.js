@@ -8,7 +8,7 @@ const rules = [
   { test: /\.css$/, use: ['style-loader', 'css-loader']}
 ];
 
-const externals1 = ['@jupyter-widgets/base'];
+const externals1 = ['@jupyter-widgets/base', 'webgui'];
 // const externals2 = ['@jupyter-widgets/base', 'webgui'];
 const externals2 = externals1;
 
@@ -73,7 +73,7 @@ module.exports = [
     module: {
         rules: rules
     },
-    externals: externals2,
+    externals: externals1,
     resolve,
     performance,
     mode,
