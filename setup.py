@@ -43,7 +43,8 @@ package_data_spec = {
     name: [
         'nbextension/**js*',
         'labextension/**',
-        'webgui.js'
+        'js/webgui_jupyter_widgets.js',
+        'js/webgui.js'
     ]
 }
 
@@ -58,15 +59,11 @@ data_files_spec = [
 
 class generate_webgui_js(build_ext):
     def run(self):
-        webgui_js_code = open(os.path.join(webgui_dir, 'dist','webgui.js')).read()
-        open('webgui_jupyter_widgets/webgui_js.py','w').write(
+        open('webgui_jupyter_widgets/js/__init__.py','w').write(
 """version = "{}"
-code = open(__file__.replace("webgui_js.py", "webgui.js")).read()
-
-if __name__ == '__main__':
-    import sys
-    open(sys.argv[1], 'w').write(code)
-""".format(webgui_version, webgui_js_code))
+code = open(__file__.replace("__init__.py", "webgui.js")).read()
+widget_code = open(__file__.replace("__init__.py", "webgui_jupyter_widgets.js")).read()
+""".format(webgui_version))
 
 #        open('template/index.html.j2','w').write(
 #"""{%- extends 'classic/index.html.j2' -%}
@@ -82,8 +79,8 @@ if __name__ == '__main__':
         join = os.path.join
         src_file = join(webgui_dir, 'dist', 'webgui.js')
         shutil.copy( src_file, join(HERE, 'webgui_jupyter_widgets', 'nbextension'))
-        shutil.copy( src_file, join(HERE, 'webgui_jupyter_widgets', 'labextensions'))
-        shutil.copy( src_file, join(HERE, 'webgui_jupyter_widgets'))
+        shutil.copy( src_file, join(HERE, 'webgui_jupyter_widgets', 'js'))
+        shutil.copy( join(HERE, 'dist', 'index.js'), join(HERE, 'webgui_jupyter_widgets', 'js', 'webgui_jupyter_widgets.js'))
 
 is_dev_build = bool(os.environ.get('DEV_BUILD', False))
 cmdclass = create_cmdclass('jsdeps', package_data_spec=package_data_spec,
