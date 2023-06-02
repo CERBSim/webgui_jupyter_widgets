@@ -62,9 +62,14 @@ class BaseWebGuiScene:
         self.encoding = 'b64'
         return html.MakeScreenshot(self.GetData(), filename, width, height)
 
-    def Draw(self, width: str = "100%", height: str = "50vh"):
+    def Draw(self, width: str|None = None, height: str|None = None):
         from IPython.display import display
         from ipywidgets import Layout
+        import os
+        if width is None:
+            width = "100%"
+        if height is None:
+            height = "500px" if "VSCODE_PID" in os.environ else "50vh"
         layout = Layout(width=width, height=height)
         self.widget = WebGuiWidget(layout=layout)
         self.encoding='binary'

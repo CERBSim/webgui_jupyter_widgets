@@ -14,9 +14,10 @@ def encodeData( data, dtype=None, encoding='b64' ):
 _html_template = None
 
 def getHTML():
+    from os.path import dirname, join
     global _html_template;
     if _html_template is None:
-        code = open(__file__.replace("html.py", "webgui.js")).read()
+        code = open(join(dirname(__file__), "js", "webgui.js")).read()
         _html_template = """
 <!DOCTYPE html>
 <html>

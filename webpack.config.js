@@ -8,9 +8,7 @@ const rules = [
   { test: /\.css$/, use: ['style-loader', 'css-loader']}
 ];
 
-const externals1 = ['@jupyter-widgets/base', 'webgui'];
-// const externals2 = ['@jupyter-widgets/base', 'webgui'];
-const externals2 = externals1;
+const externals = ['@jupyter-widgets/base'];
 
 const resolve = {
   // Add '.ts' and '.tsx' as resolvable extensions.
@@ -44,7 +42,7 @@ module.exports = [
       rules: rules
     },
     devtool: 'source-map',
-    externals: externals1,
+    externals,
     resolve,
     performance,
     mode,
@@ -73,7 +71,7 @@ module.exports = [
     module: {
         rules: rules
     },
-    externals: externals1,
+    externals,
     resolve,
     performance,
     mode,
@@ -97,7 +95,7 @@ module.exports = [
       rules: rules
     },
     devtool: 'source-map',
-    externals: externals2,
+    externals,
     resolve,
     performance,
     mode,
