@@ -62,7 +62,7 @@ class BaseWebGuiScene:
         self.encoding = 'b64'
         return html.MakeScreenshot(self.GetData(), filename, width, height)
 
-    def Draw(self, width: str|None = None, height: str|None = None):
+    def Draw(self, width = None, height = None):
         from IPython.display import display
         from ipywidgets import Layout
         import os
