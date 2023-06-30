@@ -72,7 +72,7 @@ def GenerateHTML(data, filename=None, template=None):
         open(filename,'w').write( html )
     return html
 
-def MakeScreenshot(data, filename, width=1200, height=600):
+def MakeScreenshot(data, filename, width=1200, height=600, port=0):
     import os, time
     html_file = filename+".html"
     GenerateHTML(data, filename=html_file, template=getScreenshotHTML())
@@ -93,8 +93,7 @@ def MakeScreenshot(data, filename, width=1200, height=600):
 
     options.add_argument('window-size=1200x600')
 
-
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(options=options, port=port)
     fpath = 'file://'+os.path.join(os.path.abspath('.'), html_file)
     driver.get(fpath)
     driver.implicitly_wait(10)
