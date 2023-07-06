@@ -91,11 +91,13 @@ export class WebguiDocuView extends DOMWidgetView {
     document.body.style.cursor = 'wait';
     const files = this.model.get('value');
     $.get(files['render_data'], (render_data) => {
+      document.body.style.cursor = '';
+      const style = `width: ${this.el.clientWidth}px; height: ${this.el.clientHeight}px; display-style: none;`;
       this.container.remove();
       this.container = null;
-      document.body.style.cursor = '';
       const pel = this.el.children[0];
       pel.innerHTML = '';
+      pel.setAttribute('style', style);
       const scene = new Scene();
       scene.init(pel, render_data);
     });
