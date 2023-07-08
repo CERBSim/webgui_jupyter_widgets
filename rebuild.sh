@@ -1,4 +1,4 @@
-export DEV_BUILD=1
+# export DEV_BUILD=1
 set -e
 # pip uninstall -y webgui_jupyter_widgets
 rm -f dist/*.whl
