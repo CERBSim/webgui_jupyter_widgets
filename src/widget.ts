@@ -8,11 +8,14 @@ import {
 } from '@jupyter-widgets/base';
 
 import { Scene } from 'webgui';
+import * as em_ngs from 'em_ngs';
 
 import { MODULE_NAME, MODULE_VERSION } from './version';
 
 // Import the CSS
 import '../css/widget.css';
+
+console.log("em_ngs", em_ngs)
 
 export class WebguiModel extends DOMWidgetModel {
   defaults() {
@@ -45,18 +48,36 @@ export class WebguiView extends DOMWidgetView {
   scene: Scene;
 
   render() {
-    this.el.classList.add('webgui-widget');
+    console.log("em_ngs", em_ngs)
+    em_ngs.default().then((ngs) => {
+      console.log("Loaded NGSolve ", ngs)
+      this.el.classList.add('webgui-widget');
 
-    const render_data = this.model.get('value');
-    this.scene = new Scene(this);
-    const container = document.createElement('div');
-    container.setAttribute('style', 'height: 100%; width: 100%;');
-    this.el.appendChild(container);
-    setTimeout(() => {
-      this.scene.init(container, render_data);
-      this.scene.render();
-    }, 0);
-    this.model.on('change:value', this.value_changed, this);
+      const data = this.model.get('value');
+      let render_data = null;
+      if(data.type === 'TextArchive') {
+        console.log("Generate render data from text archive", data)
+        const mesh = ngs.LoadMesh(data.mesh);
+        console.log("mesh", mesh);
+        const cf = ngs.LoadCoefficientFunction(data.cf);
+        console.log("cf", cf);
+        render_data = ngs.GenerateWebguiData(mesh, cf, 1);
+        console.log("Render data", render_data)
+      }
+      else {
+        console.log("Use render data directly")
+        render_data = data;
+      }
+      this.scene = new Scene(this);
+      const container = document.createElement('div');
+      container.setAttribute('style', 'height: 100%; width: 100%;');
+      this.el.appendChild(container);
+      setTimeout(() => {
+        this.scene.init(container, render_data);
+        this.scene.render();
+      }, 0);
+      this.model.on('change:value', this.value_changed, this);
+    });
   }
 
   value_changed() {

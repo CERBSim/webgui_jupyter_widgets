@@ -1,0 +1,9 @@
+{
+  "name": "em_ngs",
+  "version": "0.0.1",
+  "description": "",
+  "main": "dist/em_ngs.js",
+  "keywords": [],
+  "author": "",
+  "license": "LGPL-2.1-or-later"
+}

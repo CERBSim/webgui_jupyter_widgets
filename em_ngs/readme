@@ -1,0 +1,4 @@
+make a symlink from dist to the build dir of emscripten ngsolve, for me:
+dist -> /home/matthias/src/ngsolve/em_build/ngsolve/emscripten/
+# ln -s /home/matthias/src/ngsolve/em_build/ngsolve/emscripten/ dist
+

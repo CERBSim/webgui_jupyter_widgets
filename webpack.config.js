@@ -5,10 +5,23 @@ const version = require('./package.json').version;
 const rules = [
   { test: /\.ts$/, loader: 'ts-loader' },
   { test: /\.js$/, loader: 'source-map-loader' },
-  { test: /\.css$/, use: ['style-loader', 'css-loader']}
+  { test: /\.css$/, use: ['style-loader', 'css-loader']},
+  // { test: /\.wasm$/,
+  //       type: "webassembly/sync",
+  //       loader: "file-loader",
+  //       options: {
+  //         publicPath: "dist/"
+  //       }
+  //     }
 ];
 
-const externals = ['@jupyter-widgets/base'];
+
+const experiments= {
+    asyncWebAssembly: true,
+  syncWebAssembly: true,
+}
+
+const externals = ['@jupyter-widgets/base', 'em_ngs'];
 
 const resolve = {
   // Add '.ts' and '.tsx' as resolvable extensions.
@@ -43,6 +56,7 @@ module.exports = [
     },
     devtool: 'source-map',
     externals,
+    experiments,
     resolve,
     performance,
     mode,
@@ -72,6 +86,7 @@ module.exports = [
         rules: rules
     },
     externals,
+    experiments,
     resolve,
     performance,
     mode,
@@ -96,6 +111,7 @@ module.exports = [
     },
     devtool: 'source-map',
     externals,
+    experiments,
     resolve,
     performance,
     mode,

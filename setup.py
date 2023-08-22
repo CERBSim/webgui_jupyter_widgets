@@ -80,6 +80,7 @@ widget_code = open(__file__.replace("__init__.py", "webgui_jupyter_widgets.js"))
         src_file = join(webgui_dir, 'dist', 'webgui.js')
         shutil.copy( src_file, join(HERE, 'webgui_jupyter_widgets', 'nbextension'))
         shutil.copy( src_file, join(HERE, 'webgui_jupyter_widgets', 'js'))
+        # shutil.copy( join(HERE, 'em_mesh', 'dist', 'em_mesh.wasm'), join(HERE, 'webgui_jupyter_widgets', 'labextension', 'static'))
         shutil.copy( join(HERE, 'dist', 'index.js'), join(HERE, 'webgui_jupyter_widgets', 'js', 'webgui_jupyter_widgets.js'))
 
 is_dev_build = bool(os.environ.get('DEV_BUILD', False))
