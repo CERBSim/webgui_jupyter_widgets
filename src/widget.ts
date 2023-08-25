@@ -60,18 +60,12 @@ export class WebguiView extends DOMWidgetView {
         console.log("Generate render data from text archive", data)
         let mesh = null;
         let cf = null;
-        if(binary) {
-          const mdata = data.mesh;
-          console.log("meshdata", mdata)
-          mesh = ngs.LoadMesh(data.mesh.buffer, binary);
-          cf = ngs.LoadCoefficientFunction(data.cf.buffer, data.mesh.byteLength);
-        }
-        else {
-          mesh = ngs.LoadMesh(data.mesh, binary);
-          cf = ngs.LoadCoefficientFunction(data.cf, binary);
-
-        }
+        const archive_data = ngs.LoadData(data.data.buffer, binary);
+        // mesh = ngs.LoadMesh(data.mesh.buffer, binary);
+        mesh = archive_data.mesh;
         console.log("mesh", mesh);
+        // cf = ngs.LoadCoefficientFunction(data.cf.buffer, data.mesh.byteLength);
+        cf = archive_data.cf;
         console.log("cf", cf);
         render_data = ngs.GenerateWebguiData(mesh, cf, data.order ? data.order : 1);
         console.log("Render data", render_data)
