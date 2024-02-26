@@ -2,6 +2,7 @@ export DEV_BUILD=1
 set -e
 # pip uninstall -y webgui_jupyter_widgets
 rm -f dist/*.whl
+rm -rf build
 # rm -rf webgui/node_modules
 python setup.py bdist_wheel
 pip install dist/*.whl 
